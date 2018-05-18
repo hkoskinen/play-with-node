@@ -1,5 +1,11 @@
+
+// TODO: Never trust user input. Note the POST /api/cars route!
+
 const express = require('express');
 const app = express();
+const bodyParses = require('body-parser');
+
+app.use(bodyParses.json());
 
 const cars = [
   { id: 1, manufacturer: 'Nissan', model: 'GT-R', year: 2014 },
@@ -19,6 +25,18 @@ app.get('/api/cars/:id', (req, res) => {
     res.status(200).json(car);
   else
     res.status(404).json(`Car with an id [${req.params.id}] not found`);
+});
+
+app.post('/api/cars', (req, res) => {
+  console.log(req.body);
+  const car = {
+    id: cars.length + 1,
+    manufacturer: req.body.manufacturer,
+    model: req.body.model,
+    year: req.body.year
+  };
+  cars.push(car);
+  res.status(201).send(car);
 });
 
 const PORT = process.env.PORT || 3000;
