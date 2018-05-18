@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --watch src src/server.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/hkoskinen/play-with-node/issues"
   },
-  "homepage": "https://github.com/hkoskinen/play-with-node#readme"
+  "homepage": "https://github.com/hkoskinen/play-with-node#readme",
+  "devDependencies": {
+    "nodemon": "^1.17.4"
+  }
 }
