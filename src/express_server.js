@@ -1,11 +1,8 @@
-
-// TODO: Never trust user input. Note the POST /api/cars route!
-
 const express = require('express');
 const app = express();
-const bodyParses = require('body-parser');
+const bodyParser = require('body-parser');
 
-app.use(bodyParses.json());
+app.use(bodyParser.json());
 
 const cars = [
   { id: 1, manufacturer: 'Nissan', model: 'GT-R', year: 2014 },
@@ -16,19 +13,24 @@ const cars = [
 ];
 
 app.get('/api/cars', (req, res) => {
-  res.status(200).json(cars);
+  res.json(cars);
 });
 
 app.get('/api/cars/:id', (req, res) => {
   const car = cars.find(car => car.id === parseInt(req.params.id));
   if (car)
-    res.status(200).json(car);
+    res.json(car);
   else
     res.status(404).json(`Car with an id [${req.params.id}] not found`);
 });
 
 app.post('/api/cars', (req, res) => {
-  console.log(req.body);
+  // Add simple input validation...like really simple.
+  if (!req.body.manufacturer) return res.status(400).json('Invalid manufacturer name');
+  if (!req.body.model) return res.status(400).json('Invalid model name');
+  if (!req.body.year || req.body.year.length !== 4 || Number.isNaN(Number(req.body.year)))
+    return res.status(400).json('Invalid year');
+
   const car = {
     id: cars.length + 1,
     manufacturer: req.body.manufacturer,
