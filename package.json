@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch src src/server.js"
+    "dev": "nodemon --watch src src/express_server.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
   "homepage": "https://github.com/hkoskinen/play-with-node#readme",
   "devDependencies": {
     "nodemon": "^1.17.4"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
   }
 }
